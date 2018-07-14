@@ -1,0 +1,7 @@
+export const SET_ORDER_TYPE = 'SET_ORDER_TYPE';
+export const SET_ORDER_TIME = 'SET_ORDER_TIME';
+export const SET_ORDER_TABLE = 'SET_ORDER_TABLE';
+export const ORDER_ADD_ITEM = 'ORDER_ADD_ITEM';
+export const ORDER_REMOVE_ITEM = 'ORDER_REMOVE_ITEM';
+export const CANCEL_ORDER = 'CANCEL_ORDER';
+export const CHANGE_ORDER_TYPE = 'CHANGE_ORDER_TYPE';

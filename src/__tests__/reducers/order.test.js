@@ -1,15 +1,18 @@
 import order from "../../reducers/order";
+import { SET_ORDER_TYPE, SET_ORDER_TIME } from "../../actions/orderActions";
+import { SET_ORDER_TABLE, ORDER_ADD_ITEM, ORDER_REMOVE_ITEM, CANCEL_ORDER, CHANGE_ORDER_TYPE } from "../../actions/orderActionTypes";
+
 describe("ORDER REDUCER", () => {
   it('set order type', () => {
     const stateBefore = {
       type: undefined
     };
     const action1 = {
-      type: 'SET_ORDER_TYPE',
+      type: SET_ORDER_TYPE,
       orderType: 'pickup'
     };
     const action2 = {
-      type: 'SET_ORDER_TYPE',
+      type: SET_ORDER_TYPE,
       orderType: 'reservation'
     };
     const stateAfterAction1 = {
@@ -35,7 +38,7 @@ describe("ORDER REDUCER", () => {
       time: undefined
     };
     const action = {
-      type: 'SET_ORDER_TIME',
+      type: SET_ORDER_TIME,
       time: '16:00'
     };
     const stateAfter = {
@@ -55,7 +58,7 @@ describe("ORDER REDUCER", () => {
       tables: undefined
     };
     const action = {
-      type: 'SET_ORDER_TABLES',
+      type: SET_ORDER_TABLE,
       tables: 3
     };
     const stateAfter = {
@@ -75,7 +78,7 @@ describe("ORDER REDUCER", () => {
       itemsByIds: {}
     };
     const action = {
-      type: 'ORDER_ADD_ITEM',
+      type: ORDER_ADD_ITEM,
       item: {
         id: 1,
         price: 7900,
@@ -109,7 +112,7 @@ describe("ORDER REDUCER", () => {
       }
     };
     const action = {
-      type: 'ORDER_ADD_ITEM',
+      type: ORDER_ADD_ITEM,
       item: {
         id: 1,
         price: 7900,
@@ -137,7 +140,7 @@ describe("ORDER REDUCER", () => {
       itemsByIds: {}
     };
     const action = {
-      type: 'ORDER_REMOVE_ITEM',
+      type: ORDER_REMOVE_ITEM,
       item: {
         id: 1,
         price: 7900,
@@ -165,7 +168,7 @@ describe("ORDER REDUCER", () => {
       }
     };
     const action = {
-      type: 'ORDER_REMOVE_ITEM',
+      type: ORDER_REMOVE_ITEM,
       item: {
         id: 1,
         price: 7900,
@@ -199,7 +202,7 @@ describe("ORDER REDUCER", () => {
       }
     };
     const action = {
-      type: 'ORDER_REMOVE_ITEM',
+      type: ORDER_REMOVE_ITEM,
       item: {
         id: 1,
         price: 7900,
@@ -227,7 +230,7 @@ describe("ORDER REDUCER", () => {
       }
     };
     const action = {
-      type: 'CANCEL_ORDER'
+      type: CANCEL_ORDER
     };
     const stateAfter = {};
 
@@ -243,7 +246,7 @@ describe("ORDER REDUCER", () => {
       time: '16:00'
     };
     const action = {
-      type: 'CHANGE_ORDER_TYPE',
+      type: CHANGE_ORDER_TYPE,
       orderType: 'reservation',
     };
     const stateAfter = {
@@ -266,7 +269,7 @@ describe("ORDER REDUCER", () => {
       tables: 3,
     };
     const action = {
-      type: 'CHANGE_ORDER_TYPE',
+      type: CHANGE_ORDER_TYPE,
       orderType: 'pickup'
     };
     const stateAfter = {
