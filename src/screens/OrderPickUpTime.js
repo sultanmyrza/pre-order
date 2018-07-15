@@ -23,7 +23,6 @@ class OrderPickUpTime extends Component {
             padding: 5,
             justifyContent: 'center',
             flexDirection: 'row',
-            backgroundColor: 'pink',
           }}>
           <ScrollView style={{ flex: 1 }} justifyContent="center">
             <ScrollSelector dataSource={getTimes()} onValueChange={this.onValueChange} center />

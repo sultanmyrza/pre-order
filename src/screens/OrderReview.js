@@ -19,17 +19,17 @@ class OrderSubmit extends Component {
     }
 
     return (
-      <View style={{ flex: 1, paddingHorizontal: 10, backgroundColor: colors[0] }}>
+      <View style={{ flex: 1, paddingHorizontal: 10 }}>
         {this.state.orderType === 'pickup' || (
           // {/* Product-Category-End
-          <View style={{ flex: 1, backgroundColor: colors[1] }}>
+          <View style={{ flex: 1 }}>
             <Text style={{ fontSize: 27 }}>Today at 12: 30 pm 3 tables ready in 22 min 33 sec</Text>
           </View>
         )
         // {/* Product-Category-End */}
         }
         {/* Product List Start */}
-        <View style={{ flex: 5, backgroundColor: colors[2] }}>
+        <View style={{ flex: 5 }}>
           <ProductsList
             data={getProducts()}
             onProductPress={product => this.props.navigation.navigate('ProductDetail', { product })}
@@ -41,7 +41,6 @@ class OrderSubmit extends Component {
         <View
           style={{
             flex: 1,
-            backgroundColor: colors[3],
             justifyContent: 'center',
             alignItems: 'center',
           }}>
