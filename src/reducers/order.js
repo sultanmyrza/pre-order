@@ -58,22 +58,31 @@ export default function orders(state = {}, action) {
       };
     case ORDER_ADD_ITEM:
       itemId = action.item.id;
-      return {
+      newState = {
         ...state,
         itemsByIds: {
           ...state.itemsByIds,
           [itemId]: order(state.itemsByIds[itemId], action),
         },
       };
+      newState.totalPrice = sumUp(newState.itemsByIds, 'price');
+      newState.totalCookTime = sumUp(newState.itemsByIds, 'cookTimeInSec');
+      return newState;
     case ORDER_REMOVE_ITEM:
+      console.log(ORDER_REMOVE_ITEM);
       itemId = action.item.id;
-      return {
+      console.log(state);
+      newState = {
         ...state,
         itemsByIds: {
           ...state.itemsByIds,
           [itemId]: order(state.itemsByIds[action.item.id], action),
         },
       };
+      newState.totalPrice = sumUp(newState.itemsByIds, 'price');
+      newState.totalCookTime = sumUp(newState.itemsByIds, 'cookTimeInSec');
+      console.log(newState);
+      return newState;
     case CANCEL_ORDER:
       return {};
     case CHANGE_ORDER_TYPE:
@@ -88,4 +97,11 @@ export default function orders(state = {}, action) {
     default:
       return state;
   }
+}
+
+function sumUp(items, key) {
+  let totalSum = Object.keys(items).reduce((sum, item) => {
+    return sum + items[item][key] * items[item].quantity;
+  }, 0);
+  return totalSum;
 }

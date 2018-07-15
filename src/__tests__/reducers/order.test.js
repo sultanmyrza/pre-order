@@ -93,6 +93,8 @@ describe('ORDER REDUCER', () => {
           quantity: 1,
         },
       },
+      totalPrice: 7900,
+      totalCookTime: 180,
     };
 
     Object.freeze(stateBefore);
@@ -103,8 +105,8 @@ describe('ORDER REDUCER', () => {
     const stateBefore = {
       itemsByIds: {
         1: {
-          price: 7900,
-          cookTimeInSec: 180,
+          price: 8600,
+          cookTimeInSec: 120,
           quantity: 1,
         },
       },
@@ -113,19 +115,21 @@ describe('ORDER REDUCER', () => {
       type: ORDER_ADD_ITEM,
       item: {
         id: 1,
-        price: 7900,
-        cookTimeInSec: 180,
+        price: 8600,
+        cookTimeInSec: 120,
       },
     };
     const stateAfter = {
       itemsByIds: {
         1: {
           id: 1,
-          price: 7900,
-          cookTimeInSec: 180,
+          price: 8600,
+          cookTimeInSec: 120,
           quantity: 2,
         },
       },
+      totalPrice: 2 * 8600,
+      totalCookTime: 2 * 120,
     };
 
     Object.freeze(stateBefore);
@@ -161,6 +165,8 @@ describe('ORDER REDUCER', () => {
           quantity: 2,
         },
       },
+      totalPrice: 7900 * 2,
+      totalCookTime: 180 * 2,
     };
     const action = {
       type: ORDER_REMOVE_ITEM,
@@ -178,6 +184,8 @@ describe('ORDER REDUCER', () => {
           quantity: 1,
         },
       },
+      totalPrice: 7900 * 1,
+      totalCookTime: 180 * 1,
     };
 
     Object.freeze(stateBefore);
