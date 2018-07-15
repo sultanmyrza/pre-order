@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { setOrderType } from '../actions/orderActions';
 
 class OrderType extends Component {
   constructor(props) {
@@ -35,6 +37,7 @@ class OrderType extends Component {
             <TouchableOpacity
               style={styles.typeContainerItem}
               onPress={() => {
+                this.props.setOrderType('reservation');
                 this.props.navigation.navigate('OrderTime');
               }}>
               <View style={{ flex: 1, paddingTop: 15 }}>
@@ -55,7 +58,20 @@ class OrderType extends Component {
   }
 }
 
-export default OrderType;
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setOrderType: orderType => dispatch(setOrderType(orderType)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OrderType);
 
 const styles = StyleSheet.create({
   typeContainer: { flex: 2, padding: 10 },
