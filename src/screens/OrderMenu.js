@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import colors from '../utils/colors';
+import { connect } from 'react-redux';
 import CategoryScroll from '../components/CategoryScroll';
 import ProductsList from '../components/ProductsList';
 import { getProducts } from '../utils';
@@ -32,7 +32,9 @@ class OrderMenu extends Component {
         {/* Footer-Start */}
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <View style={{ flex: 1, justifyContent: 'space-around' }}>
-            <Text style={{ fontSize: 18, alignSelf: 'center' }}>3 items selected</Text>
+            <Text style={{ fontSize: 18, alignSelf: 'center' }}>
+              {this.props.order.totalItems} items selected
+            </Text>
 
             <TouchableOpacity onPress={() => this.props.navigation.navigate('OrderDetail')}>
               <Text style={{ fontSize: 18, alignSelf: 'center', textDecorationLine: 'underline' }}>
@@ -43,7 +45,7 @@ class OrderMenu extends Component {
 
           <View style={{ flex: 1, justifyContent: 'space-around' }}>
             <Text style={{ fontSize: 22, fontWeight: 'bold', alignSelf: 'center' }}>
-              1,144,000 won
+              {this.props.order.totalPrice} won
             </Text>
 
             <TouchableOpacity
@@ -59,4 +61,10 @@ class OrderMenu extends Component {
   }
 }
 
-export default OrderMenu;
+const mapStateToProps = state => {
+  return {
+    order: state.order,
+  };
+};
+
+export default connect(mapStateToProps)(OrderMenu);

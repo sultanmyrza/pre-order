@@ -17,15 +17,19 @@ export function getTables() {
   return tables;
 }
 
+let products = undefined;
 export function getProducts() {
-  const products = [];
+  if (products) {
+    return products;
+  }
+  products = [];
   for (const category of ['hamburger', 'ramen', 'pizza', 'steak', 'popcorn']) {
     for (let id = 1; id < 15; id += 1) {
       products.push({
         id,
         title: `${category}:Product:${id}`,
         price: getRandomInt(5000, 10000),
-        cookTime: getRandomInt(60 * 3, 60 * 10),
+        cookTimeInSec: getRandomInt(60 * 3, 60 * 10),
         categoryId: category,
       });
     }

@@ -75,6 +75,9 @@ describe('ORDER REDUCER', () => {
   it('increase quantity of non existing item  ', () => {
     const stateBefore = {
       itemsByIds: {},
+      totalPrice: 0,
+      totalCookTime: 0,
+      totalItems: 0,
     };
     const action = {
       type: ORDER_ADD_ITEM,
@@ -95,6 +98,7 @@ describe('ORDER REDUCER', () => {
       },
       totalPrice: 7900,
       totalCookTime: 180,
+      totalItems: 1,
     };
 
     Object.freeze(stateBefore);
@@ -110,6 +114,9 @@ describe('ORDER REDUCER', () => {
           quantity: 1,
         },
       },
+      totalPrice: 0,
+      totalCookTime: 0,
+      totalItems: 1,
     };
     const action = {
       type: ORDER_ADD_ITEM,
@@ -130,6 +137,7 @@ describe('ORDER REDUCER', () => {
       },
       totalPrice: 2 * 8600,
       totalCookTime: 2 * 120,
+      totalItems: 2,
     };
 
     Object.freeze(stateBefore);
@@ -139,6 +147,9 @@ describe('ORDER REDUCER', () => {
   it('decrease quantity of non existing item  ', () => {
     const stateBefore = {
       itemsByIds: {},
+      totalCookTime: 0,
+      totalPrice: 0,
+      totalItems: 0,
     };
     const action = {
       type: ORDER_REMOVE_ITEM,
@@ -150,6 +161,9 @@ describe('ORDER REDUCER', () => {
     };
     const stateAfter = {
       itemsByIds: {},
+      totalCookTime: 0,
+      totalPrice: 0,
+      totalItems: 0,
     };
 
     Object.freeze(stateBefore);
@@ -167,6 +181,7 @@ describe('ORDER REDUCER', () => {
       },
       totalPrice: 7900 * 2,
       totalCookTime: 180 * 2,
+      totalItems: 4,
     };
     const action = {
       type: ORDER_REMOVE_ITEM,
@@ -186,6 +201,7 @@ describe('ORDER REDUCER', () => {
       },
       totalPrice: 7900 * 1,
       totalCookTime: 180 * 1,
+      totalItems: 1,
     };
 
     Object.freeze(stateBefore);
@@ -201,6 +217,9 @@ describe('ORDER REDUCER', () => {
           quantity: 1,
         },
       },
+      totalCookTime: 180,
+      totalPrice: 7900,
+      totalItems: 1,
     };
     const action = {
       type: ORDER_REMOVE_ITEM,
@@ -212,6 +231,9 @@ describe('ORDER REDUCER', () => {
     };
     const stateAfter = {
       itemsByIds: {},
+      totalCookTime: 0,
+      totalPrice: 0,
+      totalItems: 0,
     };
 
     Object.freeze(stateBefore);

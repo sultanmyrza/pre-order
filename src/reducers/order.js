@@ -8,36 +8,14 @@ import {
   CHANGE_ORDER_TYPE,
 } from '../actions/orderActionTypes';
 
-function order(state = undefined, action) {
-  switch (action.type) {
-    case ORDER_ADD_ITEM:
-      if (state === undefined) {
-        return {
-          ...action.item,
-          quantity: 1,
-        };
-      } else {
-        return {
-          ...state,
-          id: action.item.id,
-          quantity: state.quantity + 1,
-        };
-      }
-    case ORDER_REMOVE_ITEM:
-      if (state === undefined || state.quantity <= 1) {
-        return undefined;
-      } else {
-        return {
-          ...state,
-          quantity: state.quantity - 1,
-        };
-      }
-    default:
-      return state;
-  }
-}
+let orderInitialState = {
+  itemsByIds: {},
+  totalPrice: 0,
+  totalCookTime: 0,
+  totalItems: 0,
+};
 
-export default function orders(state = {}, action) {
+export default function orders(state = orderInitialState, action) {
   let newState;
   let itemId;
   switch (action.type) {
@@ -67,6 +45,7 @@ export default function orders(state = {}, action) {
       };
       newState.totalPrice = sumUp(newState.itemsByIds, 'price');
       newState.totalCookTime = sumUp(newState.itemsByIds, 'cookTimeInSec');
+      newState.totalItems = sumUp(newState.itemsByIds, 'quantity');
       return newState;
     case ORDER_REMOVE_ITEM:
       console.log(ORDER_REMOVE_ITEM);
@@ -81,6 +60,7 @@ export default function orders(state = {}, action) {
       };
       newState.totalPrice = sumUp(newState.itemsByIds, 'price');
       newState.totalCookTime = sumUp(newState.itemsByIds, 'cookTimeInSec');
+      newState.totalItems = sumUp(newState.itemsByIds, 'quantity');
       console.log(newState);
       return newState;
     case CANCEL_ORDER:
@@ -101,10 +81,46 @@ export default function orders(state = {}, action) {
 
 function sumUp(items, key) {
   let totalSum = Object.keys(items).reduce((sum, item) => {
-    if (items[item] === undefined) {
-      return undefined;
+    item = items[item];
+    if (item === undefined) {
+      return 0;
     }
-    return sum + items[item][key] * items[item].quantity;
+    let value = item[key];
+    let quantity = item.quantity;
+    if (key !== 'quantity') {
+      return sum + value * quantity;
+    } else {
+      return sum + value;
+    }
   }, 0);
   return totalSum;
+}
+
+function order(state, action) {
+  switch (action.type) {
+    case ORDER_ADD_ITEM:
+      if (state === undefined) {
+        return {
+          ...action.item,
+          quantity: 1,
+        };
+      } else {
+        return {
+          ...state,
+          id: action.item.id,
+          quantity: state.quantity + 1,
+        };
+      }
+    case ORDER_REMOVE_ITEM:
+      if (state === undefined || state.quantity <= 1) {
+        return undefined;
+      } else {
+        return {
+          ...state,
+          quantity: state.quantity - 1,
+        };
+      }
+    default:
+      return state;
+  }
 }

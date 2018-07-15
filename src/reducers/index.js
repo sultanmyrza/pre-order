@@ -1,5 +1,5 @@
 import { combineReducers } from '../../node_modules/redux';
-import orders from './order';
+import order from './order';
 export default combineReducers({
-  orders,
+  order,
 });
