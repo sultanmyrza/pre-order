@@ -101,6 +101,9 @@ export default function orders(state = {}, action) {
 
 function sumUp(items, key) {
   let totalSum = Object.keys(items).reduce((sum, item) => {
+    if (items[item] === undefined) {
+      return undefined;
+    }
     return sum + items[item][key] * items[item].quantity;
   }, 0);
   return totalSum;
