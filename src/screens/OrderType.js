@@ -19,7 +19,12 @@ class OrderType extends Component {
 
         <View style={{ flex: 2, flexDirection: 'row', padding: 10 }}>
           <View style={styles.typeContainer}>
-            <TouchableOpacity style={styles.typeContainerItem}>
+            <TouchableOpacity
+              style={styles.typeContainerItem}
+              onPress={() => {
+                this.props.setOrderType('pickup');
+                this.props.navigation.navigate('OrderMenu');
+              }}>
               <View style={{ flex: 1, paddingTop: 15 }}>
                 <Text style={{ alignSelf: 'center', fontSize: 18 }}>Pick-up</Text>
                 <Image
