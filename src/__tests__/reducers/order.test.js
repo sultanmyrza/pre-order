@@ -1,6 +1,7 @@
-import order from '../../reducers/order';
-import { SET_ORDER_TYPE, SET_ORDER_TIME } from '../../actions/orderActions';
+import orders from '../../reducers/order';
 import {
+  SET_ORDER_TYPE,
+  SET_ORDER_TIME,
   SET_ORDER_TABLE,
   ORDER_ADD_ITEM,
   ORDER_REMOVE_ITEM,
@@ -31,8 +32,8 @@ describe('ORDER REDUCER', () => {
     Object.freeze(stateBefore);
     Object.freeze(action1);
     Object.freeze(action2);
-    expect(order(stateBefore, action1)).toEqual(stateAfterAction1);
-    expect(order(stateBefore, action2)).toEqual(stateAfterAction2);
+    expect(orders(stateBefore, action1)).toEqual(stateAfterAction1);
+    expect(orders(stateBefore, action2)).toEqual(stateAfterAction2);
   });
 
   it('set order time', () => {
@@ -50,7 +51,7 @@ describe('ORDER REDUCER', () => {
     Object.freeze(stateBefore);
     Object.freeze(action);
 
-    expect(order(stateBefore, action)).toEqual(stateAfter);
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('set tables', () => {
@@ -68,7 +69,7 @@ describe('ORDER REDUCER', () => {
     Object.freeze(action);
     Object.freeze(stateBefore);
 
-    expect(order(stateBefore, action)).toEqual(stateAfter);
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('increase quantity of non existing item  ', () => {
@@ -86,6 +87,7 @@ describe('ORDER REDUCER', () => {
     const stateAfter = {
       itemsByIds: {
         1: {
+          id: 1,
           price: 7900,
           cookTimeInSec: 180,
           quantity: 1,
@@ -94,7 +96,7 @@ describe('ORDER REDUCER', () => {
     };
 
     Object.freeze(stateBefore);
-    expect(order(stateBefore, action)).toEqual(stateAfter);
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('increase quantity of existing item  ', () => {
@@ -118,6 +120,7 @@ describe('ORDER REDUCER', () => {
     const stateAfter = {
       itemsByIds: {
         1: {
+          id: 1,
           price: 7900,
           cookTimeInSec: 180,
           quantity: 2,
@@ -126,7 +129,7 @@ describe('ORDER REDUCER', () => {
     };
 
     Object.freeze(stateBefore);
-    expect(order(stateBefore, action)).toEqual(stateAfter);
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('decrease quantity of non existing item  ', () => {
@@ -146,7 +149,7 @@ describe('ORDER REDUCER', () => {
     };
 
     Object.freeze(stateBefore);
-    expect(order(stateBefore, action)).toEqual(stateAfter);
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('decrease quantity of existing item ', () => {
@@ -178,7 +181,7 @@ describe('ORDER REDUCER', () => {
     };
 
     Object.freeze(stateBefore);
-    expect(order(stateBefore, action)).toEqual(stateAfter);
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('decrease quantity of existing item qunatity = 1', () => {
@@ -204,7 +207,7 @@ describe('ORDER REDUCER', () => {
     };
 
     Object.freeze(stateBefore);
-    expect(order(stateBefore, action)).toEqual(stateAfter);
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('cancel order', () => {
@@ -223,7 +226,7 @@ describe('ORDER REDUCER', () => {
     const stateAfter = {};
 
     Object.freeze(stateBefore);
-    expect(order(stateBefore, action)).toEqual(stateAfter);
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('change order type from pickup to reservation', () => {
@@ -238,12 +241,12 @@ describe('ORDER REDUCER', () => {
     const stateAfter = {
       type: 'reservation',
       time: '16:00',
-      tables: '1',
+      tables: 1,
     };
 
     Object.freeze(stateBefore);
 
-    expect(order(stateBefore, action)).toEqual(stateAfter);
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
   });
 
   it('change order type from reservation to pickup', () => {
@@ -263,6 +266,6 @@ describe('ORDER REDUCER', () => {
 
     Object.freeze(stateBefore);
 
-    expect(order(stateBefore, action)).toEqual(stateAfter);
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
   });
 });
