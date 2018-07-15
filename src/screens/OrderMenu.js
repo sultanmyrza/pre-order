@@ -12,15 +12,15 @@ class OrderMenu extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, paddingHorizontal: 10, backgroundColor: colors[0] }}>
+      <View style={{ flex: 1, paddingHorizontal: 10 }}>
         {/* Product-Category-End */}
-        <View style={{ flex: 1, backgroundColor: colors[1] }}>
+        <View style={{ flex: 1 }}>
           <CategoryScroll />
         </View>
         {/* Product-Category-End */}
 
         {/* Product List Start */}
-        <View style={{ flex: 5, backgroundColor: colors[2] }}>
+        <View style={{ flex: 5 }}>
           <ProductsList
             data={getProducts()}
             editableMenu
@@ -30,8 +30,8 @@ class OrderMenu extends Component {
         {/* Product List End */}
 
         {/* Footer-Start */}
-        <View style={{ flex: 1, flexDirection: 'row', backgroundColor: colors[3] }}>
-          <View style={{ flex: 1, backgroundColor: colors[4], justifyContent: 'space-around' }}>
+        <View style={{ flex: 1, flexDirection: 'row' }}>
+          <View style={{ flex: 1, justifyContent: 'space-around' }}>
             <Text style={{ fontSize: 18, alignSelf: 'center' }}>3 items selected</Text>
 
             <TouchableOpacity onPress={() => this.props.navigation.navigate('OrderDetail')}>
@@ -41,7 +41,7 @@ class OrderMenu extends Component {
             </TouchableOpacity>
           </View>
 
-          <View style={{ flex: 1, backgroundColor: colors[5], justifyContent: 'space-around' }}>
+          <View style={{ flex: 1, justifyContent: 'space-around' }}>
             <Text style={{ fontSize: 22, fontWeight: 'bold', alignSelf: 'center' }}>
               1,144,000 won
             </Text>

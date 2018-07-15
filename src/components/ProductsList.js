@@ -11,9 +11,7 @@ class ProductsList extends Component {
       <View
         key={product.id + product.title}
         style={{ flex: 1, flexDirection: 'row', marginVertical: 10 }}>
-        <TouchableOpacity
-          onPress={() => this.props.onProductPress(product)}
-          style={{ flex: 2, backgroundColor: 'yellow' }}>
+        <TouchableOpacity onPress={() => this.props.onProductPress(product)} style={{ flex: 2 }}>
           <Text style={{ fontSize: 24 }}>{product.title}</Text>
           <Text style={{ fontSize: 18 }}>{product.price}won</Text>
         </TouchableOpacity>
@@ -21,7 +19,6 @@ class ProductsList extends Component {
         <View
           style={{
             flex: 1,
-            backgroundColor: 'blue',
             flexDirection: 'row',
           }}>
           {this.props.editableMenu && (
