@@ -8,11 +8,11 @@ class CategoryScroll extends Component {
     super(props);
     this.state = {
       categories: [
-        { id: 'hamburger', url: images.hamburger },
-        { id: 'ramen', url: images.ramen },
-        { id: 'pizza', url: images.pizza },
-        { id: 'steak', url: images.steak },
-        { id: 'popcorn', url: images.popcorn },
+        { id: 'hamburger', url: images.hamburgerIcon },
+        { id: 'ramen', url: images.ramenIcon },
+        { id: 'pizza', url: images.pizzaIcon },
+        { id: 'steak', url: images.steakIcon },
+        { id: 'popcorn', url: images.popcornIcon },
       ],
       selectedCategoryId: 'hamburger',
     };
