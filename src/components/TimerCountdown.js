@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, ViewPropTypes as RNViewPropTypes } from 'react-native';
-const ViewPropTypes = RNViewPropTypes || View.propTypes;
+import { Text } from 'react-native';
 
 /**
  * A customizable countdown component for React Native.
