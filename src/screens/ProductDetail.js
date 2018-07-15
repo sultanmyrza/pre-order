@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
-import colors from '../utils/colors';
 
 class ProductDetail extends Component {
   static navigationOptions = ({ navigation, navigationOptions }) => {
@@ -22,7 +21,7 @@ class ProductDetail extends Component {
           <View style={{ flex: 4, padding: 30 }}>
             <Image
               style={{ flex: 1, width: null, height: null }}
-              source={{ uri: 'http://www.saliscendipub.it/wp-content/uploads/2015/01/stacker.jpg' }}
+              source={require('../../assets/images/products/burger.jpg')}
             />
           </View>
           <View style={{ flex: 1 }}>
