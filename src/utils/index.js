@@ -49,5 +49,12 @@ function leftPad(number, targetLength) {
 }
 
 export function formatTimeSecToMinWithSec(seconds) {
-  return `${seconds / 60} mins ${seconds % 60} secs`;
+  return `${Math.floor(seconds / 60)} mins ${seconds % 60} secs`;
+}
+
+export function itemsFromDicToArray(itemsByIds) {
+  if (itemsByIds === undefined) {
+    return [];
+  }
+  return Object.keys(itemsByIds).map(key => itemsByIds[key]);
 }

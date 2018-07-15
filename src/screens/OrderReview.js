@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import ProductsList from '../components/ProductsList';
-import { getProducts, formatTimeSecToMinWithSec } from '../utils';
+import { itemsFromDicToArray, formatTimeSecToMinWithSec } from '../utils';
 
 class OrderSubmit extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class OrderSubmit extends Component {
         {/* Product List Start */}
         <View style={{ flex: 5 }}>
           <ProductsList
-            data={getProducts()}
+            data={itemsFromDicToArray(this.props.order.itemsByIds)}
             onProductPress={product => this.props.navigation.navigate('ProductDetail', { product })}
           />
         </View>
@@ -47,7 +47,7 @@ class OrderSubmit extends Component {
             alignItems: 'center',
           }}>
           <Text style={{ fontSize: 22, fontWeight: 'bold', alignSelf: 'center' }}>
-            1,144,000 won
+            {this.props.order.totalPrice} won
           </Text>
         </View>
         {/* Footer-Start */}

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import ProductsList from '../components/ProductsList';
-import { getProducts } from '../utils';
+import { itemsFromDicToArray } from '../utils';
 
 class OrderDetail extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class OrderDetail extends Component {
         {/* Product List Start */}
         <View style={{ flex: 5 }}>
           <ProductsList
-            data={getProducts()}
+            data={itemsFromDicToArray(this.props.order.itemsByIds)}
             editableMenu
             onProductPress={product => this.props.navigation.navigate('ProductDetail', { product })}
           />
@@ -25,7 +26,7 @@ class OrderDetail extends Component {
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <View style={{ flex: 1, justifyContent: 'space-around' }}>
             <Text style={{ fontSize: 22, fontWeight: 'bold', alignSelf: 'center' }}>
-              1,144,000 won
+              {this.props.order.totalPrice} won
             </Text>
           </View>
 
@@ -49,4 +50,10 @@ class OrderDetail extends Component {
   }
 }
 
-export default OrderDetail;
+const mapStateToProps = state => {
+  return {
+    order: state.order,
+  };
+};
+
+export default connect(mapStateToProps)(OrderDetail);

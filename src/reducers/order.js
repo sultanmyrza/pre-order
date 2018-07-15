@@ -48,9 +48,7 @@ export default function orders(state = orderInitialState, action) {
       newState.totalItems = sumUp(newState.itemsByIds, 'quantity');
       return newState;
     case ORDER_REMOVE_ITEM:
-      console.log(ORDER_REMOVE_ITEM);
       itemId = action.item.id;
-      console.log(state);
       newState = {
         ...state,
         itemsByIds: {
@@ -61,10 +59,14 @@ export default function orders(state = orderInitialState, action) {
       newState.totalPrice = sumUp(newState.itemsByIds, 'price');
       newState.totalCookTime = sumUp(newState.itemsByIds, 'cookTimeInSec');
       newState.totalItems = sumUp(newState.itemsByIds, 'quantity');
-      console.log(newState);
       return newState;
     case CANCEL_ORDER:
-      return {};
+      return {
+        itemsByIds: {},
+        totalCookTime: 0,
+        totalPrice: 0,
+        totalItems: 0,
+      };
     case CHANGE_ORDER_TYPE:
       newState = { ...state, type: action.orderType };
       if (action.orderType === 'pickup') {

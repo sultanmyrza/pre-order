@@ -249,11 +249,19 @@ describe('ORDER REDUCER', () => {
         1: { price: 7900, quantity: 3, cookTimeInSec: 180 },
         2: { price: 8200, quantity: 2, cookTimeInSec: 360 },
       },
+      totalCookTime: 180 * 3 + 360 * 2,
+      totalPrice: 7900 * 3 + 8200 * 2,
+      totalItems: 0,
     };
     const action = {
       type: CANCEL_ORDER,
     };
-    const stateAfter = {};
+    const stateAfter = {
+      itemsByIds: {},
+      totalCookTime: 0,
+      totalPrice: 0,
+      totalItems: 0,
+    };
 
     Object.freeze(stateBefore);
     expect(orders(stateBefore, action)).toEqual(stateAfter);

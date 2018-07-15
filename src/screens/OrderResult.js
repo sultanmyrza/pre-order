@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import TimerCountdown from '../components/TimerCountdown';
+import { cancelOrder } from '../actions/orderActions';
 
 class OrderResult extends Component {
   constructor(props) {
@@ -29,7 +31,10 @@ class OrderResult extends Component {
           style={{ fontSize: 20 }}
         />
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('OrderBegin')}
+          onPress={() => {
+            this.props.cancelOrder();
+            this.props.navigation.navigate('OrderBegin');
+          }}
           style={{ width: 250, borderRadius: 5, borderWidth: 2, padding: 5, alignItems: 'center' }}>
           <Text style={{ fontSize: 24 }}>Cancel</Text>
         </TouchableOpacity>
@@ -38,4 +43,19 @@ class OrderResult extends Component {
   }
 }
 
-export default OrderResult;
+const mapStateToProps = state => {
+  return {
+    order: state.order,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    cancelOrder: () => dispatch(cancelOrder()),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OrderResult);
