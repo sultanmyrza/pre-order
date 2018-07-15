@@ -24,6 +24,10 @@ const OrderStackNavigator = createStackNavigator(
     },
     OrderMenu: {
       screen: OrderMenu,
+      navigationOptions: ({ navigation, defaultHeader }) => ({
+        ...defaultHeader,
+        title: 'Order Menu',
+      }),
     },
     OrderPickUpTime: {
       screen: OrderPickUpTime,
