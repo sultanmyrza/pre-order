@@ -20,6 +20,7 @@ class CategoryScroll extends Component {
 
   handlePress = categoryId => {
     this.setState({ selectedCategoryId: categoryId });
+    this.props.changeCategory(categoryId);
   };
 
   drawUnderline = (a, b) => {

@@ -8,21 +8,26 @@ import { getProducts } from '../utils';
 class OrderMenu extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      productCategory: 'hamburger',
+    };
   }
+  changeCategory = productCategory => {
+    this.setState({ productCategory });
+  };
   render() {
     return (
       <View style={{ flex: 1, paddingHorizontal: 10 }}>
         {/* Product-Category-End */}
         <View style={{ flex: 1 }}>
-          <CategoryScroll />
+          <CategoryScroll changeCategory={this.changeCategory} />
         </View>
         {/* Product-Category-End */}
 
         {/* Product List Start */}
         <View style={{ flex: 5 }}>
           <ProductsList
-            data={getProducts()}
+            data={getProducts(this.state.productCategory)}
             editableMenu
             onProductPress={product => this.props.navigation.navigate('ProductDetail', { product })}
           />

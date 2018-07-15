@@ -17,15 +17,16 @@ export function getTables() {
 }
 
 let products = undefined;
-export function getProducts() {
+export function getProducts(productCategory) {
   if (products) {
-    return products;
+    return products.filter(product => product.category === productCategory);
   }
   products = [];
   for (const category of ['hamburger', 'ramen', 'pizza', 'steak', 'popcorn']) {
     for (let id = 1; id < 15; id += 1) {
       products.push({
         id,
+        category,
         title: `${category}:Product:${id}`,
         price: getRandomInt(5000, 10000),
         cookTimeInSec: getRandomInt(60 * 3, 60 * 10),
@@ -33,7 +34,7 @@ export function getProducts() {
       });
     }
   }
-  return products;
+  return products.filter(product => product.category === productCategory);
 }
 
 function getRandomInt(min, max) {
