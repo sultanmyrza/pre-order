@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import colors from '../utils/colors';
-import CategoryScroll from '../components/CategoryScroll';
 import ProductsList from '../components/ProductsList';
 import { getProducts } from '../utils';
 

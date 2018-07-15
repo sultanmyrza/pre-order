@@ -5,7 +5,6 @@ export function getTimes() {
       times.push(`${h}:${leftPad(m, 2)}`);
     }
   }
-  console.log(times);
   return times;
 }
 
@@ -47,4 +46,8 @@ function leftPad(number, targetLength) {
     output = '0' + output;
   }
   return output;
+}
+
+export function formatTimeSecToMinWithSec(seconds) {
+  return `${seconds / 60} mins ${seconds % 60} secs`;
 }

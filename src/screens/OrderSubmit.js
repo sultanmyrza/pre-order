@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import ProductsList from '../components/ProductsList';
-import { getProducts } from '../utils';
+import { getProducts, formatTimeSecToMinWithSec } from '../utils';
 
 class OrderSubmit extends Component {
   constructor(props) {
     super(props);
-    this.state = { orderType: 'pickup' };
   }
   render() {
-    let nextScreen = 'OrderFinish';
+    let nextScreen = 'OrderEnd';
     let nextButtonTitle = 'Submit';
-    if (this.state.orderType === 'pickup') {
+    const { order } = this.props;
+    const orderType = order.type;
+    if (orderType === 'pickup') {
       nextScreen = 'OrderPickUpTime';
       nextButtonTitle = 'Next';
     }
 
     return (
       <View style={{ flex: 1, paddingHorizontal: 10 }}>
-        {this.state.orderType === 'pickup' || (
+        {orderType === 'pickup' || (
           // {/* Product-Category-End
           <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 27 }}>Today at 12: 30 pm 3 tables ready in 22 min 33 sec</Text>
+            <Text style={{ fontSize: 27 }}>
+              Today at {order.time} {order.tables} tables ready in
+              {formatTimeSecToMinWithSec(order.totalCookTime)}
+            </Text>
           </View>
         )
         // {/* Product-Category-End */}
@@ -63,4 +68,10 @@ class OrderSubmit extends Component {
   }
 }
 
-export default OrderSubmit;
+const mapStateToProps = state => {
+  return {
+    order: state.order,
+  };
+};
+
+export default connect(mapStateToProps)(OrderSubmit);

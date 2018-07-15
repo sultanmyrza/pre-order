@@ -23,7 +23,6 @@ class CategoryScroll extends Component {
   };
 
   drawUnderline = (a, b) => {
-    console.log(a, b);
     return <View style={{ height: 5, backgroundColor: 'red' }} />;
   };
 

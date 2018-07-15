@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import CustomButton from '../components/CustomButton';
 import ScrollSelector from '../components/ScrollSelector';
 import { getTables } from '../utils';
+import { setOrderTable } from '../actions/orderActions';
 
 class OrderTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { selectedValue: 1 };
   }
 
   onValueChange = (selectedValue, selectedIndex) => {
-    alert(`Selected tables ${selectedValue}`);
+    this.setState({ selectedValue });
   };
 
   render() {
@@ -42,7 +44,10 @@ class OrderTable extends Component {
             alignItems: 'center',
           }}>
           <CustomButton
-            onPress={() => this.props.navigation.navigate('OrderMenu')}
+            onPress={() => {
+              this.props.setOrderTable(this.state.selectedValue);
+              this.props.navigation.navigate('OrderMenu');
+            }}
             title={'Next'}
           />
         </View>
@@ -51,4 +56,19 @@ class OrderTable extends Component {
   }
 }
 
-export default OrderTable;
+const mapStateToProps = state => {
+  return {
+    order: state.order,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setOrderTable: orderTable => dispatch(setOrderTable(orderTable)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OrderTable);

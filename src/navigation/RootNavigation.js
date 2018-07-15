@@ -38,9 +38,17 @@ const OrderStackNavigator = createStackNavigator(
     },
     OrderSubmit: {
       screen: OrderSubmit,
+      navigationOptions: ({ navigation, defaultHeader }) => ({
+        ...defaultHeader,
+        title: 'Order Submit',
+      }),
     },
     OrderTable: {
       screen: OrderTable,
+      navigationOptions: ({ navigation, defaultHeader }) => ({
+        ...defaultHeader,
+        title: 'Order Table',
+      }),
     },
     OrderTime: {
       screen: OrderTime,
@@ -54,6 +62,10 @@ const OrderStackNavigator = createStackNavigator(
     },
     ProductDetail: {
       screen: ProductDetail,
+      navigationOptions: ({ navigation, defaultHeader }) => ({
+        ...defaultHeader,
+        title: 'Product Detail',
+      }),
     },
   },
   {

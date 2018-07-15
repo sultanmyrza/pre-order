@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import CustomButton from '../components/CustomButton';
 import ScrollSelector from '../components/ScrollSelector';
 import { getTimes } from '../utils';
+import { setOrderTime } from '../actions/orderActions';
 
 class OrderPickUpTime extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { selectedValue: '12:00' };
   }
 
   onValueChange = (selectedValue, selectedIndex) => {
-    alert(`Selected Time ${selectedValue}`);
+    this.setState({ selectedValue });
   };
 
   render() {
@@ -37,7 +39,10 @@ class OrderPickUpTime extends Component {
             alignItems: 'center',
           }}>
           <CustomButton
-            onPress={() => this.props.navigation.navigate('OrderEnd')}
+            onPress={() => {
+              this.props.setOrderTime(this.state.selectedValue);
+              this.props.navigation.navigate('OrderEnd');
+            }}
             title={'Submit'}
           />
         </View>
@@ -46,4 +51,19 @@ class OrderPickUpTime extends Component {
   }
 }
 
-export default OrderPickUpTime;
+const mapStateToProps = state => {
+  return {
+    order: state.order,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setOrderTime: orderTime => dispatch(setOrderTime(orderTime)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OrderPickUpTime);
