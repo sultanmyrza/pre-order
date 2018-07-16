@@ -74,6 +74,7 @@ export function generateOrderMetaInfo() {
   const consumer = `${Constants.deviceName}`;
   const provider = 'namsan';
   const orderNumber = generateOrderNumber();
+  const timestamp = new Date().getTime();
   const status = 'pending';
-  return { consumer, provider, orderNumber, status };
+  return { consumer, provider, orderNumber, timestamp, status };
 }
