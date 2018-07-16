@@ -1,3 +1,4 @@
+import { Constants } from 'expo';
 export function getTimes() {
   let times = [];
   for (let h = 12; h < 18; h++) {
@@ -58,4 +59,21 @@ export function itemsFromDicToArray(itemsByIds) {
     return [];
   }
   return Object.keys(itemsByIds).map(key => itemsByIds[key]);
+}
+
+function generateOrderNumber() {
+  return (
+    '' +
+    Math.random()
+      .toString()
+      .substr(2, 9)
+  );
+}
+
+export function generateOrderMetaInfo() {
+  const consumer = `${Constants.deviceName}`;
+  const provider = 'namsan';
+  const orderNumber = generateOrderNumber();
+  const status = 'pending';
+  return { consumer, provider, orderNumber, status };
 }

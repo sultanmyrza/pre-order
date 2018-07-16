@@ -16,6 +16,7 @@ import {
   orderRemoveItem,
   cancelOrder,
   changeOrderType,
+  finishOrder,
 } from '../../actions/orderActions';
 
 describe('ORDER REDUCER', () => {
@@ -274,6 +275,29 @@ describe('ORDER REDUCER', () => {
     const stateAfter = {
       type: 'pickup',
       time: '16:00',
+    };
+
+    Object.freeze(stateBefore);
+
+    expect(orders(stateBefore, action)).toEqual(stateAfter);
+  });
+  it('finish order', () => {
+    const stateBefore = {};
+
+    const consumer = 'userId';
+    const provider = 'namsan';
+    const orderNumber = '12345';
+    const timestamp = new Date();
+    const status = 'pending';
+
+    const action = finishOrder(consumer, provider, orderNumber, timestamp, status);
+
+    const stateAfter = {
+      consumer,
+      provider,
+      orderNumber,
+      timestamp,
+      status,
     };
 
     Object.freeze(stateBefore);

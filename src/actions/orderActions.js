@@ -6,6 +6,7 @@ import {
   ORDER_REMOVE_ITEM,
   CANCEL_ORDER,
   CHANGE_ORDER_TYPE,
+  FINISH_ORDER,
 } from './orderActionTypes';
 
 export const setOrderType = orderType => ({
@@ -40,4 +41,13 @@ export const cancelOrder = () => ({
 export const changeOrderType = orderType => ({
   type: CHANGE_ORDER_TYPE,
   orderType,
+});
+
+export const finishOrder = (consumer, provider, orderNumber, timestamp, status = 'pending') => ({
+  type: FINISH_ORDER,
+  consumer,
+  provider,
+  orderNumber,
+  timestamp,
+  status,
 });

@@ -5,3 +5,4 @@ export const ORDER_ADD_ITEM = 'ORDER_ADD_ITEM';
 export const ORDER_REMOVE_ITEM = 'ORDER_REMOVE_ITEM';
 export const CANCEL_ORDER = 'CANCEL_ORDER';
 export const CHANGE_ORDER_TYPE = 'CHANGE_ORDER_TYPE';
+export const FINISH_ORDER = 'FINISH_ORDER';

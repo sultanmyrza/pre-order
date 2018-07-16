@@ -6,6 +6,7 @@ import {
   ORDER_REMOVE_ITEM,
   CANCEL_ORDER,
   CHANGE_ORDER_TYPE,
+  FINISH_ORDER,
 } from '../actions/orderActionTypes';
 
 let orderInitialState = {
@@ -76,6 +77,15 @@ export default function orders(state = orderInitialState, action) {
         newState.tables = 1;
         return newState;
       }
+    case FINISH_ORDER:
+      return {
+        ...state,
+        consumer: action.consumer,
+        provider: action.provider,
+        orderNumber: action.orderNumber,
+        timestamp: action.timestamp,
+        status: action.status,
+      };
     default:
       return state;
   }
