@@ -94,7 +94,7 @@ const RootNavigationStack = createSwitchNavigator(
     OrderBegin: OrderStackNavigator,
     OrderEnd: FinalStackNavigator,
   },
-  { initialRouteName: 'OrderEnd' }
+  { initialRouteName: 'OrderBegin' }
 );
 
 export default RootNavigationStack;
