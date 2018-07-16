@@ -25,8 +25,8 @@ class OrderType extends Component {
                 this.props.setOrderType('pickup');
                 this.props.navigation.navigate('OrderMenu');
               }}>
-              <View style={{ flex: 1, paddingTop: 15 }}>
-                <Text style={{ alignSelf: 'center', fontSize: 18 }}>Pick-up</Text>
+              <View style={styles.cardContainer}>
+                <Text style={{ fontSize: 18 }}>Pick-up</Text>
                 <Image
                   source={require('../../assets/images/order-pick-up.png')}
                   style={styles.itemImage}
@@ -45,8 +45,8 @@ class OrderType extends Component {
                 this.props.setOrderType('reservation');
                 this.props.navigation.navigate('OrderTime');
               }}>
-              <View style={{ flex: 1, paddingTop: 15 }}>
-                <Text style={{ alignSelf: 'center', fontSize: 18 }}>Table-reservation</Text>
+              <View style={styles.cardContainer}>
+                <Text style={{ fontSize: 18 }}>Table-reservation</Text>
                 <Image
                   source={require('../../assets/images/order-table.png')}
                   style={styles.itemImage}
@@ -79,7 +79,13 @@ export default connect(
 )(OrderType);
 
 const styles = StyleSheet.create({
+  cardContainer: {
+    flex: 1,
+    paddingTop: 15,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
   typeContainer: { flex: 2, padding: 10 },
   typeContainerItem: { flex: 2, backgroundColor: 'white', borderRadius: 8 },
-  itemImage: { width: 120, height: 120, alignSelf: 'center' },
+  itemImage: { width: 80, height: 80 },
 });
