@@ -24,7 +24,7 @@ class OrderSubmit extends Component {
           // {/* Product-Category-End
           <View style={{ flex: 1 }}>
             <Text style={{ fontSize: 27 }}>
-              Today at {order.time} {order.tables} tables ready in
+              Today at {order.time} {order.tables} tables ready in{' '}
               {formatTimeSecToMinWithSec(order.totalCookTime)}
             </Text>
           </View>
