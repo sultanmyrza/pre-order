@@ -15,12 +15,12 @@ export const setOrderType = orderType => ({
 
 export const setOrderTime = orderTime => ({
   type: SET_ORDER_TIME,
-  orderTime,
+  time: orderTime,
 });
 
 export const setOrderTable = orderTable => ({
   type: SET_ORDER_TABLE,
-  orderTable,
+  tables: orderTable,
 });
 
 export const orderAddItem = item => ({
