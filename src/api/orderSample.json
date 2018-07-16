@@ -1,0 +1,42 @@
+{
+    "itemsByIds": {
+        "hamburger:Product:2": {
+            "id": "hamburger:Product:2",
+            "category": "hamburger",
+            "title": "hamburger:Product:2",
+            "price": 8101,
+            "cookTimeInSec": 396,
+            "categoryId": "hamburger",
+            "quantity": 1
+        },
+        "hamburger:Product:1": {
+            "id": "hamburger:Product:1",
+            "category": "hamburger",
+            "title": "hamburger:Product:1",
+            "price": 5289,
+            "cookTimeInSec": 268,
+            "categoryId": "hamburger",
+            "quantity": 1
+        },
+        "hamburger:Product:4": {
+            "id": "hamburger:Product:4",
+            "category": "hamburger",
+            "title": "hamburger:Product:4",
+            "price": 5569,
+            "cookTimeInSec": 296,
+            "categoryId": "hamburger",
+            "quantity": 2
+        }
+    },
+    "totalPrice": 24528,
+    "totalCookTime": 1256,
+    "totalItems": 4,
+    "type": "reservation",
+    "time": "12:20",
+    "tables": 2,
+    "consumer": "sultanmyrza’s iMac",
+    "orderNumber": "542056409",
+    "provider": "namsan",
+    "status": "pending",
+    "timestamp": 1531711541007
+}

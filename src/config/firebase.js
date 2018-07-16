@@ -1,4 +1,5 @@
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+const firebase = require('firebase');
 
 // Initialize Firebase
 const config = {
@@ -12,7 +13,11 @@ const config = {
 
 firebase.initializeApp(config);
 
-export const database = firebase.database();
-export const auth = firebase.auth();
-export const provider = new firebase.auth.FacebookAuthProvider();
-export const storage = firebase.storage();
+module.exports = {
+  database: firebase.database,
+  auth: firebase.auth,
+};
+// export const database = firebase.database();
+// export const auth = firebase.auth();
+// export const provider = new firebase.auth.FacebookAuthProvider();
+// export const storage = firebase.storage();
