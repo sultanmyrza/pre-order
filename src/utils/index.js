@@ -25,7 +25,7 @@ export function getProducts(productCategory) {
   for (const category of ['hamburger', 'ramen', 'pizza', 'steak', 'popcorn']) {
     for (let id = 1; id < 15; id += 1) {
       products.push({
-        id,
+        id: `${category}:Product:${id}`,
         category,
         title: `${category}:Product:${id}`,
         price: getRandomInt(5000, 10000),
