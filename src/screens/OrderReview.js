@@ -19,17 +19,6 @@ class OrderSubmit extends Component {
     const { order } = this.props;
     return (
       <View style={{ flex: 1, paddingHorizontal: 10 }}>
-        {orderType === 'pickup' || (
-          // {/* Product-Category-End
-          <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 27 }}>
-              Today at {order.time} {order.tables} tables ready in
-              {formatTimeSecToMinWithSec(order.totalCookTime)}
-            </Text>
-          </View>
-        )
-        // {/* Product-Category-End */}
-        }
         {/* Product List Start */}
         <View style={{ flex: 5 }}>
           <ProductsList
