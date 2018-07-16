@@ -15,7 +15,7 @@ class OrderResult extends Component {
   }
   componentDidMount() {
     if (this.state.orderRequestReady === false) {
-      setTimeout(async () => {
+      global.setTimeout(async () => {
         console.log('fetching order request');
         this.setState({ orderMetaInfo: generateOrderMetaInfo() });
         // firebaser request
