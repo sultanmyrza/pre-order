@@ -24,7 +24,7 @@ let updateCount = 0;
 
 function sendOrder(order) {
   return new Promise((resolve, reject) => {
-    const orderRef = database().ref(`orders/${order.consumer}/${order.orderNumber}`);
+    const orderRef = database().ref(`orders/${order.orderNumber}`);
     orderRef
       .set({ ...order })
       .then(error => {

@@ -114,15 +114,17 @@ class OrderResult extends Component {
         <TouchableOpacity onPress={() => this.props.navigation.navigate('OrderReview')}>
           <Text style={{ fontSize: 24, textDecorationLine: 'underline' }}>Details</Text>
         </TouchableOpacity>
-        <TimerCountdown
-          initialSecondsRemaining={this.props.order.totalCookTime * 1000}
-          onTick={secondsRemaining =>
-            console.log('tick', formatTimeSecToMinWithSec(Math.floor(secondsRemaining / 1000)))
-          }
-          onTimeElapsed={() => console.log('complete')}
-          allowFontScaling
-          style={{ fontSize: 20 }}
-        />
+        {this.state.orderStatus === 'done' || (
+          <TimerCountdown
+            initialSecondsRemaining={this.props.order.totalCookTime * 1000}
+            onTick={secondsRemaining =>
+              console.log('tick', formatTimeSecToMinWithSec(Math.floor(secondsRemaining / 1000)))
+            }
+            onTimeElapsed={() => console.log('complete')}
+            allowFontScaling
+            style={{ fontSize: 20 }}
+          />
+        )}
         <Text>Ordered from: {consumer}</Text>
         <Text>Your order state: {this.state.orderStatus}</Text>
         <TouchableOpacity
