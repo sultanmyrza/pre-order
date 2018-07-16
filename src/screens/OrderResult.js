@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import TimerCountdown from '../components/TimerCountdown';
-import { cancelOrder, finishOrder } from '../actions/orderActions';
+import { cancelOrder, finishOrder, setOrderTable } from '../actions/orderActions';
 import { generateOrderMetaInfo, formatTimeSecToMinWithSec } from '../utils';
+import { sendOrder } from '../api/firebase';
 
 class OrderResult extends Component {
   constructor(props) {
@@ -11,29 +12,63 @@ class OrderResult extends Component {
     this.state = {
       orderRequestReady: false,
       orderFailed: false,
+      listener: undefined,
       fadeAnim: new Animated.Value(0),
+      orderStatus: 'pending',
     };
   }
+
+  handleOrderUpdates = snapshot => {
+    let updatedOrder = snapshot.val();
+    console.log(updatedOrder);
+    let { status } = updatedOrder;
+    alert(`Your order state is ${status}`);
+    this.setState({ orderStatus: status });
+    if (status === 'cancel' || status === 'done') {
+      this.removeOrderListener(this.state.orderRef);
+    }
+  };
+
+  addOrderListener = listener => {
+    if (listener) {
+      console.log('add listener');
+      listener.on('value', this.handleOrderUpdates);
+    }
+  };
+
+  removeOrderListener = listener => {
+    if (listener) {
+      console.log('remove listener');
+      listener.off();
+    }
+  };
+
   componentDidMount() {
     if (this.state.orderRequestReady === false) {
-      // finish order
       let orderMetaInfo = generateOrderMetaInfo();
       let { consumer, provider, orderNumber, timestamp, status } = orderMetaInfo;
+
       this.props.finishOrder(consumer, provider, orderNumber, timestamp, status);
-      // console.log(JSON.stringify(this.props.order));
-      // await firebaser request
-      // add listener to key
-      // this.setState({
-      //   orderRequestReady: true,
-      // });
-      Animated.timing(this.state.fadeAnim, {
-        toValue: 1,
-        duration: 3000,
-      }).start();
+
+      const finalOrder = { ...this.props.order, ...orderMetaInfo };
+      console.log(finalOrder);
+      sendOrder(finalOrder)
+        .then(orderRef => {
+          this.setState({ orderRef, orderRequestReady: true });
+          this.addOrderListener(orderRef);
+          Animated.timing(this.state.fadeAnim, {
+            toValue: 1,
+            duration: 3000,
+          }).start();
+        })
+        .catch(error => {
+          console.log(error);
+          this.setState({ orderFailed: true });
+        });
     }
   }
   componentWillUnmount() {
-    // TODO: remove firebase listener
+    this.removeOrderListener(this.state.orderRef);
   }
   render() {
     if (!this.state.orderRequestReady) {
@@ -49,8 +84,7 @@ class OrderResult extends Component {
           <Text>Order failed try again</Text>
           <TouchableOpacity
             onPress={() => {
-              this.props.cancelOrder();
-              this.props.navigation.navigate('OrderBegin');
+              sendOrder(this.props.order);
             }}
             style={{
               width: 250,
@@ -90,9 +124,11 @@ class OrderResult extends Component {
           style={{ fontSize: 20 }}
         />
         <Text>Ordered from: {consumer}</Text>
+        <Text>Your order state: {this.state.orderStatus}</Text>
         <TouchableOpacity
           onPress={() => {
             this.props.cancelOrder();
+            // update staus in firebase to cancel
             this.props.navigation.navigate('OrderBegin');
           }}
           style={{ width: 250, borderRadius: 5, borderWidth: 2, padding: 5, alignItems: 'center' }}>

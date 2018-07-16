@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import RootNavigationStack from '../navigation/RootNavigation';
 import reducer from '../reducers';
-
+import { firebaseAnonimSignIn } from '../api/firebase';
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(logger)));
 
 function cacheImages(images) {
@@ -43,7 +43,7 @@ export default class Setup extends Component {
 
     const fontAssets = cacheFonts([{}]);
 
-    await Promise.all([...imageAssets, ...fontAssets]);
+    await Promise.all([firebaseAnonimSignIn(), ...imageAssets, ...fontAssets]);
   }
 
   render() {

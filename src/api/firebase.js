@@ -9,9 +9,11 @@ function firebaseAnonimSignIn() {
     .signInAnonymously()
     .then(result => {
       console.log(result);
+      alert('sign in anonymously');
     })
     .catch(function(error) {
       // Handle Errors here.
+      alert('failed to sign in anonymously');
       var errorCode = error.code;
       var errorMessage = error.message;
       // ...
@@ -20,7 +22,7 @@ function firebaseAnonimSignIn() {
 
 let updateCount = 0;
 
-function setOrder(order) {
+function sendOrder(order) {
   return new Promise((resolve, reject) => {
     const orderRef = database().ref(`orders/${order.consumer}/${order.orderNumber}`);
     orderRef
@@ -29,25 +31,17 @@ function setOrder(order) {
         if (error) {
           console.log(error);
         }
-        orderRef.on('value', function(snapshot) {
-          let updatedValue = snapshot.val();
-          console.log(updatedValue);
-          updateCount++;
-
-          if (updateCount > 2) {
-            orderRef.off();
-          }
-        });
-        console.log('order pending');
+        resolve(orderRef);
       })
       .catch(error => {
         console.log('catch');
         console.log(error);
+        reject(new Error(error.message));
       });
   });
 }
 
-module.exports = { firebaseAnonimSignIn, setOrder };
+module.exports = { firebaseAnonimSignIn, sendOrder };
 
 // export function updateOrder(order) {
 //   return new Promise((resolve, reject) => {
