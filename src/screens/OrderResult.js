@@ -24,7 +24,7 @@ class OrderResult extends Component {
           <Text style={{ fontSize: 24, textDecorationLine: 'underline' }}>Details</Text>
         </TouchableOpacity>
         <TimerCountdown
-          initialSecondsRemaining={1000 * 60 * 24}
+          initialSecondsRemaining={this.props.order.totalCookTime * 1000}
           onTick={secondsRemaining => console.log('tick', secondsRemaining)}
           onTimeElapsed={() => console.log('complete')}
           allowFontScaling
