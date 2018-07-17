@@ -59,6 +59,9 @@ const OrderStackNavigator = createStackNavigator(
     },
     OrderType: {
       screen: OrderType,
+      navigationOptions: {
+        header: null,
+      },
     },
     ProductDetail: {
       screen: ProductDetail,
