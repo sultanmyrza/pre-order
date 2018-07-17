@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import TimerCountdown from '../components/TimerCountdown';
 import { cancelOrder, finishOrder, setOrderTable } from '../actions/orderActions';
 import { generateOrderMetaInfo, formatTimeSecToMinWithSec } from '../utils';
-import { sendOrder } from '../api/firebase';
-
+import { sendOrder, updateOrder } from '../api/firebase';
 class OrderResult extends Component {
   constructor(props) {
     super(props);
@@ -98,7 +97,8 @@ class OrderResult extends Component {
         </View>
       );
     }
-    let { orderNumber, consumer } = this.props.order;
+    let { order } = this.props;
+    let { orderNumber, consumer } = order;
     let { fadeAnim } = this.state;
     return (
       <Animated.View
@@ -129,9 +129,14 @@ class OrderResult extends Component {
         <Text>Your order state: {this.state.orderStatus}</Text>
         <TouchableOpacity
           onPress={() => {
-            this.props.cancelOrder();
+            let updatedOrder = { ...order, status: 'canceled' };
+            updateOrder(updatedOrder)
+              .then(() => {
+                this.props.cancelOrder();
+                this.props.navigation.navigate('OrderBegin');
+              })
+              .catch(err => alert(err.message));
             // update staus in firebase to cancel
-            this.props.navigation.navigate('OrderBegin');
           }}
           style={{ width: 250, borderRadius: 5, borderWidth: 2, padding: 5, alignItems: 'center' }}>
           <Text style={{ fontSize: 24 }}>Cancel</Text>

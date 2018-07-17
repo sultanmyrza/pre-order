@@ -41,7 +41,26 @@ function sendOrder(order) {
   });
 }
 
-module.exports = { firebaseAnonimSignIn, sendOrder };
+function updateOrder(updatedOrder) {
+  return new Promise((resolve, reject) => {
+    const orderRef = database().ref(`orders/${updatedOrder.orderNumber}`);
+    orderRef
+      .set({ ...updatedOrder })
+      .then(error => {
+        if (error) {
+          console.log(error);
+        }
+        resolve(true);
+      })
+      .catch(error => {
+        console.log('catch');
+        console.log(error);
+        reject(new Error(error.message));
+      });
+  });
+}
+
+module.exports = { firebaseAnonimSignIn, sendOrder, updateOrder };
 
 // export function updateOrder(order) {
 //   return new Promise((resolve, reject) => {
