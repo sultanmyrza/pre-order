@@ -10,7 +10,7 @@ class OrderType extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: 'gray' }}>
+      <View style={{ flex: 1 }}>
         <View style={{ flex: 1, justifyContent: 'flex-end' }}>
           <Text style={{ alignSelf: 'center', fontSize: 35 }}>Namsan Dinner</Text>
           <Text style={{ alignSelf: 'center', fontSize: 35 }}>& Pub</Text>
