@@ -98,6 +98,8 @@ class OrderResult extends Component {
       );
     }
     let { order } = this.props;
+    let currentOrderStatus = this.state.orderStatus;
+    let buttonText = currentOrderStatus === 'done' ? 'Done' : 'Cancel';
     let { orderNumber, consumer } = order;
     let { fadeAnim } = this.state;
     return (
@@ -129,17 +131,21 @@ class OrderResult extends Component {
         <Text>Your order state: {this.state.orderStatus}</Text>
         <TouchableOpacity
           onPress={() => {
-            let updatedOrder = { ...order, status: 'canceled' };
-            updateOrder(updatedOrder)
-              .then(() => {
-                this.props.cancelOrder();
-                this.props.navigation.navigate('OrderBegin');
-              })
-              .catch(err => alert(err.message));
-            // update staus in firebase to cancel
+            if (currentOrderStatus === 'done') {
+              this.props.navigation.navigate('OrderBegin');
+            } else {
+              let updatedOrder = { ...order, status: 'canceled' };
+              updateOrder(updatedOrder)
+                .then(() => {
+                  this.props.cancelOrder();
+                  this.props.navigation.navigate('OrderBegin');
+                })
+                .catch(err => alert(err.message));
+              // update staus in firebase to cancel
+            }
           }}
           style={{ width: 250, borderRadius: 5, borderWidth: 2, padding: 5, alignItems: 'center' }}>
-          <Text style={{ fontSize: 24 }}>Cancel</Text>
+          <Text style={{ fontSize: 24 }}>{buttonText}</Text>
         </TouchableOpacity>
       </Animated.View>
     );
