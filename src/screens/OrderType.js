@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   typeContainer: { flex: 2, padding: 10 },
-  typeContainerItem: { flex: 2, backgroundColor: 'white', borderRadius: 8 },
+  typeContainerItem: { flex: 2, borderRadius: 8, borderWidth: 1 },
   itemImage: { width: 80, height: 80 },
 });
