@@ -78,3 +78,17 @@ export function generateOrderMetaInfo() {
   const status = 'pending';
   return { consumer, provider, orderNumber, timestamp, status };
 }
+
+export function sendSms(message, number) {
+  fetch('https://wi7bi9kl3m.execute-api.us-east-1.amazonaws.com/dev/sendMessage', {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    message, 
+    number
+  }),
+});
+}

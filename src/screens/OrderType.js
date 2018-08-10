@@ -87,5 +87,5 @@ const styles = StyleSheet.create({
   },
   typeContainer: { flex: 2, padding: 10 },
   typeContainerItem: { flex: 2, borderRadius: 8, borderWidth: 1 },
-  itemImage: { width: 80, height: 80 },
-});
+  itemImage: { width: null, height: null, flex: 1 },
+})

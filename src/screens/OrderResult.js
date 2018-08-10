@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import TimerCountdown from '../components/TimerCountdown';
 import { cancelOrder, finishOrder, setOrderTable } from '../actions/orderActions';
-import { generateOrderMetaInfo, formatTimeSecToMinWithSec } from '../utils';
+import { generateOrderMetaInfo, formatTimeSecToMinWithSec, sendSms } from '../utils';
 import { sendOrder, updateOrder } from '../api/firebase';
 class OrderResult extends Component {
   constructor(props) {
@@ -20,11 +20,14 @@ class OrderResult extends Component {
   handleOrderUpdates = snapshot => {
     let updatedOrder = snapshot.val();
     console.log(updatedOrder);
-    let { status } = updatedOrder;
+    let { status, orderNumber, totalPrice, time } = updatedOrder;
     alert(`Your order state is ${status}`);
     this.setState({ orderStatus: status });
-    if (status === 'cancel' || status === 'done') {
+    if (status === 'canceled' || status === 'done') {
       this.removeOrderListener(this.state.orderRef);
+      let message = `Your order ${orderNumber} is ${status}. Price: ${totalPrice} won.`;
+      let number = "+821062895214";
+      sendSms(message, number);
     }
   };
 
@@ -55,6 +58,9 @@ class OrderResult extends Component {
         .then(orderRef => {
           this.setState({ orderRef, orderRequestReady: true });
           this.addOrderListener(orderRef);
+          let message = `Your order ${orderNumber} is ${status}`;
+          let number = "+821062895214";
+          sendSms(message, number);
           Animated.timing(this.state.fadeAnim, {
             toValue: 1,
             duration: 3000,
@@ -132,6 +138,7 @@ class OrderResult extends Component {
         <TouchableOpacity
           onPress={() => {
             if (currentOrderStatus === 'done') {
+              this.props.cancelOrder();
               this.props.navigation.navigate('OrderBegin');
             } else {
               let updatedOrder = { ...order, status: 'canceled' };
